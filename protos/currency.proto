@@ -1,0 +1,21 @@
+syntax = "proto3";
+package currency_proto;
+
+service Currency {
+    rpc GetCurrency (CurrencyRequest) returns (CurrencyMsg);
+}
+
+message CurrencyRequest {
+    string input = 1;
+}
+
+message CurrencyMsg {
+    int32 ts = 1;
+    float dkk = 2;
+    float eur = 3;
+    float gbp = 4;
+    float btc = 5;
+    float eth = 6;
+    string created_at = 7;
+}
+

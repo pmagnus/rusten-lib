@@ -1,0 +1,55 @@
+syntax = "proto3";
+package kraken_proto;
+
+service Kraken {
+    rpc Ticker (KrakenRequest) returns (KrakenTickerMsg);
+    rpc TickerDay (KrakenRequest) returns (stream KrakenTickerMsg);
+    rpc Ohcl (KrakenRequest) returns (stream KrakenOhlcMsg);
+}
+
+enum Interval {
+   MINUTE = 0;
+   MINUTE_5 = 1;
+   MINUTE_15 = 2;
+   MINUTE_30 = 3;
+   HOUR = 4;
+   HOUR_4 = 5;
+   DAY = 6;
+   MONDAY = 7;
+}
+
+message KrakenRequest {
+  Interval interval = 1;
+}
+
+message KrakenTickerMsg {
+    int32 id = 1;
+    float last_price= 2;
+    float last_volume= 3;
+    float volume_today= 4;
+    float volume_24_hours= 5;
+    int32 trades_today = 6;
+    int32 trades_24_hours = 7;
+    
+    float ask_price = 8;
+    int32 ask_whole_lot_volume = 9;
+    float ask_lot_volume= 10;
+
+    float bid_price = 11;
+    int32 bid_whole_lot_volume = 12;
+    float bid_lot_volume = 13;
+
+    string created_at = 14;
+}
+
+message KrakenOhlcMsg {
+    string ts = 1; 
+    float vwap = 2;
+    float open = 3;
+    float high = 4;
+    float low = 5;
+    float close = 6;
+    float volume = 7;
+    int32 count = 8;
+    int32 unix_time = 9;
+  }
