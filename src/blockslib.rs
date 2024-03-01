@@ -76,8 +76,9 @@ pub async fn init_mempool_client() {
             }
             Err(e) => {
                 tracing::info!(
-                    "Failed to connect to gRPC service: {}. Retrying in 2 seconds...",
-                    e
+                    "Failed to connect to gRPC service: {}. Server  {}",
+                    e,
+                    server_url.clone()
                 );
                 std::thread::sleep(Duration::new(2, 0));
             }
